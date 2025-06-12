@@ -1,0 +1,45 @@
+<% layout('campgrounds/layouts/boilerplate') %>
+
+<div id="cluster-map"></div>
+
+<div class="flash-absolute">
+    <%- include('./partials/flash') %>
+</div>
+
+<div class="px-4">
+    <h2 class="mt-4 mb-3 text-center">All Campgrounds 
+        <a href="/campgrounds/new" class="ms-2 btn btn-outline-secondary btn-sm">New Campground</a>
+    </h2>
+    
+    <div class="row flex-wrap justify-content-center px-4 px-sm-0">
+        <% for (campground of allCampgrounds ) { %>
+            <section class="col rounded-3 border border-secondary d-flex flex-column my-3 mx-auto mx-sm-4 p-3 min-w-250">
+                <% if (campground.images && campground.images.length > 0) { %>
+                    <img crossorigin="anonymous" src="<%= campground.images[0].carousel %>" alt="Image for <%= campground.title %> campground" class="thumbnail col-12 py-2">
+                <%  } %>
+        
+                <div class="col-12 d-flex flex-column py-3">
+                    <h3 class="mb-2"><%= campground.title %> <span class="fs-6 text-muted d-xl-none">$<%= campground.price %>/night</span></h3>
+                    <p class="fs-6 text-muted d-none d-lg-block">
+                        $<%= campground.price %>/night
+                    </p>
+                    <p class="text-muted fw-semibold mb-0"><%= campground.location %></p>
+    
+                    <small class="my-3"> <%= campground.description.slice(0,60) %>...</small>
+    
+                    <form action="/campgrounds/<%= campground._id %>" class="w-50 mt-auto">
+                        <button type="submit" class="btn btn-outline-secondary btn-sm">View Details</button>
+                    </form>
+                </div>
+            </section>
+        <% } %>
+    </div>
+</div>
+
+<script>
+    const mapToken = '<%- process.env.MAPBOX_TOKEN %>';
+    const allCampgrounds = {
+        features: <%- JSON.stringify(allCampgrounds) %>
+        }
+</script>
+<script src="/scripts/clusterMap.js"></script>

@@ -1,0 +1,9 @@
+<!-- to dynamically set the BS classes w/ the flash category (i.e. 'success', 'danger', etc.) -->
+<% for (category in flash) { %>
+    <% if(category && category.length) { %>
+        <div class="alert alert-<%= (category === 'error') ? 'danger' : category %> d-flex justify-content-between py-3" role="alert">
+            <%= flash[category] %>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    <% } %>
+<% } %>

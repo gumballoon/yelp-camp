@@ -1,0 +1,12 @@
+<% layout('campgrounds/layouts/boilerplate') %>
+
+<!-- Boostrap ALERT component -->
+<div class="p-4 alert alert-danger align-items-center text-center" role="alert">
+    <div>
+      <h1 class="fw-semibold"> <%= err.status %> </h1>
+      <h2 class="fs-4"> <%= err.message %> </h2>
+      <%  if (process.env.NODE_ENV !== 'production') { %>
+        <p class="text-start"> <%= err.stack %> </h3>
+      <%  } %>
+    </div>
+  </div>

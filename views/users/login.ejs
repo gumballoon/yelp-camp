@@ -1,0 +1,32 @@
+<% layout('campgrounds/layouts/boilerplate') %>
+
+<div class="px-4 py-2 mt-4">
+    <div class="flash-relative">
+        <%- include('../campgrounds/partials/flash') %>
+    </div>
+
+    <div class="text-center">
+        <h2 class="mb-0">Login</h2>
+        <small>
+            <a href="/register" class="text-muted">Not a user yet?</a>
+        </small>
+    </div>
+
+    <form action="/login" method="post" id="register" class="needs-validation mx-auto" novalidate>
+        
+        <div>
+            <label for="username" class="form-label mt-3">Username <sup>*</sup></label>
+            <input type="text" id="username" name="username" required  class="form-control" autofocus>
+            <div class="invalid-feedback">Please provide a valid username.</div>
+        </div>
+
+        <div>
+            <label for="password" class="form-label mt-3">Password <sup>*</sup></label>
+            <input type="password" id="password" name="password" required  class="form-control">
+            <div class="invalid-feedback">Please provide a valid password.</div>
+        </div>
+
+        <button type="submit" class="btn btn-outline-secondary btn-sm d-inline-block mt-3">Login</button>
+    </form>
+
+</div>

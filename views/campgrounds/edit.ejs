@@ -1,0 +1,72 @@
+<% layout('campgrounds/layouts/boilerplate') %>
+
+<div class="px-4 py-2 mt-4">
+    <div class="flash-relative">
+        <%- include('./partials/flash') %>
+    </div>
+    
+    <div class="text-center">
+        <h2>Edit Campground</h2>
+
+        <a href="/campgrounds/<%= foundCampground._id %>"  class="btn btn-outline-secondary btn-sm">Campground Page</a>
+    </div>
+
+    <form action="/campgrounds/<%= foundCampground._id %>?_method=put" method="post" class="needs-validation mx-auto" novalidate enctype="multipart/form-data" id="edit-form">
+        <div>
+            <label for="title" class="form-label mt-3">Titles <sup>*</sup></label>
+            <input type="text" id="title" name="campground[title]" required  class="form-control" value="<%= foundCampground.title %>">
+            <div class="invalid-feedback">Please provide a valid title.</div>
+        </div>
+
+        <div>
+            <label for="price" class="form-label mt-3">Price per Night <sup>*</sup></label>
+            <input type="number" id="price" name="campground[price]" min="10" required  class="form-control" value="<%= foundCampground.price%>">
+            <div class="invalid-feedback">Please provide a valid price (minimum is $10).</div>
+        </div>
+
+        <div>
+            <label for="location" class="form-label mt-3">Location <sup>*</sup></label>
+            <select id="location" name="campground[location]" class="form-control">
+                <% for (city of citiesAndStates) {%>
+                    <% if (city === foundCampground.location) { %>
+                        <option value="<%= city %>" selected> <%= city %></option>
+                    <% } else { %>
+                        <option value="<%= city %>"> <%= city %></option>
+                    <% } %>
+                <% } %>
+            </select>
+        </div>
+
+        <p class="form-label mt-3">Images to Delete</p>
+        <div class="row">
+            <% foundCampground.images.forEach((image, i) => { %>
+                <div class="col-6 col-md-4 col-xl-3 mb-3">
+                    <input type="checkbox" id="image-<%= i %>" name="deleteImages[]" value="<%= image.filename %>" class="btn-check">
+                    <label for="image-<%= i %>" class="btn btn-outline-secondary p-1">
+                        <img crossorigin="anonymous" src="<%= image.thumbnail %>" alt="" class="img-thumbnail img-fluid col">
+                    </label>
+                </div>
+            <% }) %>
+        </div>
+
+        <div>      
+            <label for="images" class="form-label mt-3">Upload Images</label>
+            <input type="file" id="images" name="images" class="form-control" multiple accept="image/jpeg, image/jpg, image/png">
+            <div id="file-names" class="form-text"></div>
+            <div id="max-files" class="invalid-feedback d-block d-none">Please upload a maximum of 3 images (JPEG, JPG or PNG).</div>
+        </div>
+
+        <div>
+            <label for="description" class="form-label mt-3">Description <sup>*</sup></label>
+            <textarea name="campground[description]" id="description"class="form-control w-md-75" required><%= foundCampground.description %></textarea>
+            <div class="invalid-feedback">Please provide a description.</div>
+        </div>
+
+        <button type="submit" class="btn btn-outline-secondary btn-sm d-inline-block mt-3">Update Campground</button>
+    </form>
+
+    <form action="/campgrounds/<%= foundCampground._id %>?_method=delete" method="post" id="delete-form" class="mx-auto">
+        <button type="submit" class="btn btn-outline-secondary btn-sm mt-3">Delete Campground</button>
+    </form>
+
+</div>
