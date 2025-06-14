@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const dbURL = process.env.DB_URL || 'mongodb://127.0.0.1:27017/yelp-camp'; // production DB vs. development DB
+const dbURL = process.env.DB_URL || 'mongodb+srv://franciscocristinasound:lX6ZMcUpYwzbKxRM@mycluster.zjecnfo.mongodb.net/?retryWrites=true&w=majority&appName=MyCluster'; // production DB vs. development DB
 mongoose.connect(dbURL) // to connect to a specific database
     .then(() => {
         console.log("Connection w/ MongoDB: Open")
@@ -70,8 +70,8 @@ async function seedDB() {
 
     const defaultImages = [
         {
-          url: 'https://res.cloudinary.com/dxp2zkrch/image/upload/v1748521912/YelpCamp/nalgwqdcuteov7oliejc.jpg',
-          filename: 'YelpCamp/nalgwqdcuteov7oliejc'
+          url: 'https://res.cloudinary.com/dxp2zkrch/image/upload/v1748600325/YelpCamp/jcsh6btsdvpemrvkgnxm.jpg',
+          filename: 'YelpCamp/jcsh6btsdvpemrvkgnxm'
         },
         {
           url: 'https://res.cloudinary.com/dxp2zkrch/image/upload/v1748521912/YelpCamp/enxnly9rpoc8fnjibyp5.jpg',

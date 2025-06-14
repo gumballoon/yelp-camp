@@ -5,7 +5,7 @@ if (process.env.NODE_ENV !== 'production'){
 }
 
 // to test the PRODUCTION views (i.e. hide stack trace on errors)
-require('dotenv').config();
+// require('dotenv').config();
 
 // EXPRESS setup
 const express = require('express');
