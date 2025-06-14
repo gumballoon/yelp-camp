@@ -31,8 +31,8 @@ const morgan = require('morgan'); // to get info logs on each received request
 app.use(morgan('tiny')); // to print basic info
 
 // MONGO setup
-const dbURL = process.env.DB_URL || 'mongodb://127.0.0.1:27017/yelp-camp'; // production DB vs. development DB
 const mongoose = require('mongoose');
+const dbURL = process.env.DB_URL || 'mongodb://127.0.0.1:27017/yelp-camp'; // production DB vs. development DB
 mongoose.connect(dbURL) // to connect to a specific database
     .then(() => {
         console.log("Connection w/ MongoDB: Open")
@@ -159,7 +159,7 @@ app.use((req, res, next) => {
 })
 
 // R O U T E S //
-app.get('/home', (req, res, next) => {
+app.get('/', (req, res, next) => {
     res.render('campgrounds/home');
 })
 

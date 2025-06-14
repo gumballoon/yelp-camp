@@ -41,10 +41,10 @@ module.exports.logoutUser = (req, res) => {
     req.logout((err) => {
         if(err) {
             req.flash('danger', err.message);
-            res.redirect('/home');
+            res.redirect('/');
         } else {
             req.flash('success', 'You have successfully logged-out');
-            res.redirect('/home');
+            res.redirect('/');
         }
     })
 }

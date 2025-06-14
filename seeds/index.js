@@ -1,5 +1,6 @@
-const mongoose = require('mongoose'); // import MONGOOSE
-mongoose.connect('mongodb://127.0.0.1:27017/yelp-camp') // to connect to a specific database
+const mongoose = require('mongoose');
+const dbURL = process.env.DB_URL || 'mongodb://127.0.0.1:27017/yelp-camp'; // production DB vs. development DB
+mongoose.connect(dbURL) // to connect to a specific database
     .then(() => {
         console.log("Connection w/ MongoDB: Open")
     })
@@ -26,15 +27,28 @@ function getRandomElement(arr) {
 
 // function to be executed every time the model is updated (in order to reset the collection w/ new instances)
 async function seedDB() {
-    // to delete all instances of Review and Campground
-    await Review.deleteMany({})
-    .then(() => console.log('All reviews have been deleted.'))
-    .catch(e => console.log(e))
-    
+    // to delete all instances of Campground, Review & User
     await Campground.deleteMany({})
         .then(() => console.log('All campgrounds have been deleted.'))
         .catch(e => console.log(e))
-    
+
+    await Review.deleteMany({})
+    .then(() => console.log('All reviews have been deleted.'))
+    .catch(e => console.log(e))
+
+    await User.deleteMany({})
+    .then(() => console.log('All users have been deleted.'))
+    .catch(e => console.log(e))
+
+    // to seed the Users collection
+    for (let username of ['jerry', 'george', 'elaine', 'kramer', 'newman']) {
+        const newUser = new User({
+            username,
+            email: `${username}@gmail.com`
+        });
+        
+        await User.register(newUser, `${username}pass`);
+    }
     const allUsers = await User.find({});
 
     // to create & store 90 new instances on the randomReviews array
