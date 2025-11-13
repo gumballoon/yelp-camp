@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const dbURL = 'mongodb+srv://franciscocristinasound:lX6ZMcUpYwzbKxRM@mycluster.zjecnfo.mongodb.net/?retryWrites=true&w=majority&appName=MyCluster';
+const dbURL = process.env.DB_URL;
 mongoose.connect(dbURL) // to connect to a specific database
     .then(() => {
         console.log("Connection w/ MongoDB: Open")
